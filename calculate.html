@@ -7,7 +7,12 @@
     <title>Money Calculation App</title>
 
     <script>
-      localStorage.setItem("theme", "Light");
+      const LsValue = localStorage.getItem("theme");
+      if (LsValue === "Dark") {
+        localStorage.setItem("theme", "Dark");
+      } else {
+        localStorage.setItem("theme", "Light");
+      }
     </script>
   </head>
 
