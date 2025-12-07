@@ -33,34 +33,6 @@ document.getElementById("themeToggle").addEventListener("click", (e) => {
   e.target.innerText = `Now ${themeValue} Mode`;
 });
 
-// document.getElementById("themeToggle").addEventListener("click", async (e) => {
-
-//   // STEP 1: Async-এর মতো localStorage থেকে data আনা
-//   let lsValue2 = await Promise.resolve(localStorage.getItem("theme") || "Light");
-
-//   console.log("LS Old Value =", lsValue2);
-
-//   // STEP 2: Logic apply করা
-//   let newTheme;
-
-//   if (lsValue2 === "Dark") {
-//     newTheme = "Light";
-//     document.body.classList.add("bg-white", "text-gray-700");
-//     document.body.classList.remove("bg-gray-900", "text-white");
-//   } else {
-//     newTheme = "Dark";
-//     document.body.classList.add("bg-gray-900", "text-white");
-//     document.body.classList.remove("bg-white", "text-gray-700");
-//   }
-
-//   // STEP 3: নতুন value localStorage এ save করা
-//   localStorage.setItem("theme", newTheme);
-
-//   // STEP 4: Button text update (নতুন theme show করবে)
-//   e.target.innerText = `Now ${newTheme} Mode`;
-
-// });
-
 // ADD TO HISTORY
 function addHistory(type, amount, sendAmount) {
   let list = document.getElementById("historyList");
