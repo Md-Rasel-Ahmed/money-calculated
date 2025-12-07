@@ -95,7 +95,7 @@ function calculateBkash() {
     let result = (rate / 5000) * amount;
     let box = document.getElementById("bkashResult");
 
-    box.innerText = `Calculated Amount: MVR ${result.toFixed(2)}`;
+    box.innerText = `You have to pay : MVR ${result.toFixed(2)}`;
     box.classList.remove("hidden");
 
     addHistory("Bkash", result.toFixed(2), amount);
@@ -127,7 +127,7 @@ function calculateBank() {
     let result = (rate / 100000) * amount;
     let box = document.getElementById("bankResult");
 
-    box.innerText = `Calculated Amount: MVR ${result.toFixed(2)}`;
+    box.innerText = `You have to pay : MVR ${result.toFixed(2)}`;
     box.classList.remove("hidden");
 
     addHistory("Bank", result.toFixed(2), amount);
