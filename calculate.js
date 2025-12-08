@@ -45,8 +45,14 @@ function addHistory(type, amount, sendAmount) {
   list.prepend(li);
 }
 
+const rufiInputText = "";
+let isBkashRufiForm = false;
+let isBankRufiForm = false;
+let isBdForm = false;
+const labelText = document.getElementById("labelText");
+const labelTextBank = document.getElementById("labelTextBank");
 // Bkash Calculation
-function calculateBkash() {
+function calculateBkash(name) {
   let amount = document.getElementById("bkashAmount").value;
   let rate = document.getElementById("bkashRate").value;
   let error = document.getElementById("bkashError");
@@ -60,19 +66,30 @@ function calculateBkash() {
 
   error.classList.add("hidden");
 
-  btn.innerText = "Calculating...";
+  btn.innerText = "হিসেবে করতেছি ...";
   btn.disabled = true;
-
   setTimeout(() => {
     let result = (rate / 5000) * amount;
-    let box = document.getElementById("bkashResult");
 
-    box.innerText = `You have to pay : MVR ${result.toFixed(2)}`;
+    let box = document.getElementById("bkashResult");
+    if (isBkashRufiForm) {
+      // console.log(amount, rate);
+      console.log((5000 / rate) * amount);
+
+      box.innerText = `আপনি ${amount} রুফি দিলে ${
+        (5000 / rate) * amount
+      } টাকা পাঠানো হবে  `;
+    } else {
+      box.innerText = `আপনাকে ${result} রুফিয়া দিতে হবে ${parseInt(
+        amount
+      ).toLocaleString("en-IN")} টাকা পাঠানোর জন্য `;
+    }
+
     box.classList.remove("hidden");
 
-    addHistory("Bkash", result.toFixed(2), amount);
+    addHistory("Bkash", result.toFixed(2), amount.toLocaleString("en-IN"));
 
-    btn.innerText = "Calculate";
+    btn.innerText = "হিসেব করুন";
     btn.disabled = false;
   }, 800);
 }
@@ -92,19 +109,63 @@ function calculateBank() {
 
   error.classList.add("hidden");
 
-  btn.innerText = "Calculating...";
+  btn.innerText = "হিসেবে করতেছি ...";
   btn.disabled = true;
 
   setTimeout(() => {
     let result = (rate / 100000) * amount;
     let box = document.getElementById("bankResult");
 
-    box.innerText = `You have to pay : MVR ${result.toFixed(2)}`;
+    if (isBankRufiForm) {
+      box.innerText = `আপনি ${amount} রুফি দিলে ${
+        (100000 / rate) * amount
+      } টাকা পাঠানো হবে  `;
+    } else {
+      box.innerText = `আপনাকে ${result} রুফিয়া দিতে হবে ${parseInt(
+        amount
+      ).toLocaleString("en-IN")} টাকা পাঠানোর জন্য  `;
+    }
     box.classList.remove("hidden");
 
     addHistory("Bank", result.toFixed(2), amount);
 
-    btn.innerText = "Calculate";
+    btn.innerText = "হিসেব করুন";
     btn.disabled = false;
   }, 800);
 }
+// bkash
+const bdToMvBtn = document.getElementById("bdToMvBtn");
+const mvToBdBtn = document.getElementById("mvToBdBtn");
+const bkash1 = document.getElementById("bkash1");
+const bkash2 = document.getElementById("bkash2");
+
+bdToMvBtn.addEventListener("click", (e) => {
+  mvToBdBtn.classList.remove("bg-green-400");
+  e.target.classList.add("bg-green-400");
+  labelText.innerText = "বাংলাদেশে টাকা পাঠানোর পরিমান";
+  isBkashRufiForm = false;
+});
+
+mvToBdBtn.addEventListener("click", (e) => {
+  bdToMvBtn.classList.remove("bg-green-400");
+  e.target.classList.add("bg-green-400");
+  labelText.innerText = "রুফিয়ার পরিমান লিখুন ";
+  isBkashRufiForm = true;
+});
+// bank
+const bdToMvBtnBank = document.getElementById("bdToMvBtnBank");
+const mvToBdBtnBank = document.getElementById("mvToBdBtnBank");
+
+bdToMvBtnBank.addEventListener("click", (e) => {
+  mvToBdBtnBank.classList.remove("bg-green-400");
+  e.target.classList.add("bg-green-400");
+  labelTextBank.innerText = "বাংলাদেশে টাকা পাঠানোর পরিমান";
+  isBankRufiForm = false;
+});
+
+mvToBdBtnBank.addEventListener("click", (e) => {
+  bdToMvBtnBank.classList.remove("bg-green-400");
+  e.target.classList.add("bg-green-400");
+  labelTextBank.innerText = "রুফিয়ার পরিমান লিখুন ";
+  isBankRufiForm = true;
+});
