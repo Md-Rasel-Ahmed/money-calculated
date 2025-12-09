@@ -4,9 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Enter Name</title>
+    <title>Money Calculation</title>
     <script>
       localStorage.setItem("theme", "Light");
+      let isNameAvailable = localStorage.getItem("userName");
+      if (isNameAvailable) {
+        window.location.href = "calculate.html";
+      }
     </script>
   </head>
 
